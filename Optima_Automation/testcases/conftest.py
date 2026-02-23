@@ -23,8 +23,10 @@ def setup(request):
     options = Options()
     # options.add_argument("--log-level=3")
     options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     username, password = request.param
-    driver = webdriver.Chrome(service=Service(), options=options)
+    driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     driver.get("https://optimahp-qa.kellton.net/")
     login_page = LoginPage(driver)

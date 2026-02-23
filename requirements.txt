@@ -1,0 +1,8 @@
+openpyxl==3.1.5
+pytest==8.4.1
+python-dotenv==1.1.1
+requests==2.32.4
+selenium==4.34.2
+webdriver-manager==4.0.2
+websocket-client==1.8.0
+ddt~=1.7.2

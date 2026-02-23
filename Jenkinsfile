@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('pytest') {
+            agent{
+                docker {
+                    image 'python'
+                    reuseNode true
+                }
+
+            }
+            steps {
+                sh '''
+                    python --version
+                    pwd
+                    python -m venv venv
+                    . venv/bin/activate
+                    pwd
+                    pip install -r requirements.txt
+                    pytest Optima_Automation -vs
+                '''
+
+            }
+        }
+    }
+
+}

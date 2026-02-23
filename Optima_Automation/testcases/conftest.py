@@ -11,6 +11,7 @@ filename = 'Optima_Automation/testdata/usercradentials.xlsx'
 testdata = Utils.read_data_from_excel(filename, "Cradentials")
 
 
+
 @pytest.fixture(scope="function", params=testdata)
 def setup(request):
     # if browser == "chrome":
@@ -26,7 +27,7 @@ def setup(request):
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     username, password = request.param
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(service=Service(), options=options)
     driver.maximize_window()
     driver.get("https://optimahp-qa.kellton.net/")
     login_page = LoginPage(driver)

@@ -23,6 +23,7 @@ pipeline {
                     pwd
                     pip install --upgrade pip
                     pip install -r requirements.txt
+                    google-chrome --version
                     pytest Optima_Automation -vs
                 '''
             }

@@ -23,9 +23,6 @@ pipeline {
                 sh '''
                     python --version
                     pwd
-                    python -m venv venv
-                    . venv/bin/activate
-                    pwd
                     pip install -r requirements.txt
                     pytest Optima_Automation -vs
                 '''

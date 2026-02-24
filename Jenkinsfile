@@ -1,34 +1,30 @@
 pipeline {
     agent any
-    environment {
-        HOME = '/tmp'
-    }
 
     stages {
-        stage('Hello') {
+
+        stage('Checkout') {
             steps {
-                echo 'Hello World'
+                checkout scm
             }
         }
-        stage('pytest') {
-            agent{
+
+        stage('Run Pytest in Docker') {
+            agent {
                 docker {
-                    image 'python'
-                    image 'selenium/standalone-chrome:latest'
+                    image 'python:3.11-slim'
                     reuseNode true
                 }
-
             }
             steps {
                 sh '''
                     python --version
                     pwd
+                    pip install --upgrade pip
                     pip install -r requirements.txt
                     pytest Optima_Automation -vs
                 '''
-
             }
         }
     }
-
 }

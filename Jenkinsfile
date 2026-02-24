@@ -14,6 +14,7 @@ pipeline {
             agent{
                 docker {
                     image 'python'
+                    image 'selenium/standalone-chrome:latest'
                     reuseNode true
                 }
 

@@ -50,6 +50,8 @@ pipeline {
                     pip install --upgrade pip    # requirements already in image
                     google-chrome --version || echo "chrome not installed"
                     pytest --html=Optima_Automation/reports/report.html --self-contained-html -vs
+                    pwd
+                    ls -l Optima_Automation/reports/
                 '''
             }
         }

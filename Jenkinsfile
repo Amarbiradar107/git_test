@@ -8,26 +8,6 @@ pipeline {
                 checkout scm
             }
         }
-        stage('aws cli') {
-
-            agent{
-                docker{
-                    image 'amazon/aws-cli:latest'
-                    args "--entrypoint=''"
-                }
-            }
-            
-            steps {
-
-                withCredentials([usernamePassword(credentialsId: 'awsID', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-                        sh '''
-                                aws --version
-                                aws s3 ls
-                        '''
-                    }
-                
-            }
-        }
 
         stage('Build image') {
             steps {
@@ -53,6 +33,27 @@ pipeline {
                     pwd
                     ls -l Optima_Automation/reports/
                 '''
+            }
+        }
+        stage('Post ') {
+
+            agent{
+                docker{
+                    image 'amazon/aws-cli:latest'
+                    args "--entrypoint=''"
+                }
+            }
+            
+            steps {
+
+                withCredentials([usernamePassword(credentialsId: 'awsID', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                        sh '''
+                                aws --version
+                                aws s3 ls
+                                aws s3 cp ///var/jenkins_home/workspace/git_docker/Optima_Automation/reports/report.html s3://jenkins-test-26022026/report.html
+                        '''
+                    }
+                
             }
         }
     }

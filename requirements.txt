@@ -6,3 +6,4 @@ selenium==4.34.2
 webdriver-manager==4.0.2
 websocket-client==1.8.0
 ddt~=1.7.2
+pytest-html

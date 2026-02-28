@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-optional: install chrome if you need it for your selenium tests
+# optional: install chrome if you need it for your selenium tests
 RUN apt-get update && \
     apt-get install -y wget gnupg2 && \
     wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \

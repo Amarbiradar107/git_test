@@ -50,6 +50,7 @@ pipeline {
                         sh '''
                                 aws --version
                                 aws s3 ls
+                                pwd
                                 aws s3 cp /var/jenkins_home/workspace/git_docker/Optima_Automation/reports/report.html s3://jenkins-test-26022026/report.html
                         '''
                     }

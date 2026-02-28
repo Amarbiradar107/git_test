@@ -5,7 +5,7 @@ pipeline {
 
         stage('docker build') {
             steps {
-                sh 'docker build -t Selenium-pytest .'
+                sh 'docker build -t selenium-pytest .'
             }
         }
 

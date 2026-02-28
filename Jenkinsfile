@@ -3,6 +3,12 @@ pipeline {
 
     stages {
 
+        stage('docker build') {
+            steps {
+                sh 'docker build -t Selenium-pytest .'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm

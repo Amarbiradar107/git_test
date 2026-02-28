@@ -2,24 +2,23 @@ pipeline {
     agent any
 
     stages {
-
-        stage('docker build') {
-            steps {
-                sh 'docker build -t selenium-pytest .'
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
+        stage('Build image') {
+            steps {
+                sh 'docker build -t selenium-pytest .'
+            }
+        }
+
         stage('Run Pytest in Docker') {
             agent {
                 docker {
-                    image 'python:3.11-slim'
-                    args '-u root' 
+                    image 'selenium-pytest'      // use the image we just built
+                    args '-u root'
                     reuseNode true
                 }
             }
@@ -27,9 +26,8 @@ pipeline {
                 sh '''
                     python --version
                     pwd
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                    google-chrome --version
+                    pip install --upgrade pip    # requirements already in image
+                    google-chrome --version || echo "chrome not installed"
                     pytest Optima_Automation -vs
                 '''
             }

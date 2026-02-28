@@ -45,7 +45,7 @@ pipeline {
                 }
             }
 
-            enviroment{
+            environment{
                 AWS_S3_BUCKET= 'jenkins-test-26022026'
             }
             

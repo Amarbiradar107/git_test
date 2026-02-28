@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+
     stages {
         stage('Checkout') {
             steps {
@@ -17,9 +18,14 @@ pipeline {
             }
             
             steps {
-                sh '''
-                    aws --version
-                '''
+
+                withCredentials([usernamePassword(credentialsId: 'awsID', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                        sh '''
+                                aws --version
+                                aws S3 ls
+                        '''
+                    }
+                
             }
         }
 

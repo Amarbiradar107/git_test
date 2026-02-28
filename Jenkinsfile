@@ -44,6 +44,10 @@ pipeline {
                     args "--entrypoint=''"
                 }
             }
+
+            enviroment{
+                AWS_S3_BUCKET= 'jenkins-test-26022026'
+            }
             
             steps {
 
@@ -52,7 +56,7 @@ pipeline {
                                 aws --version
                                 aws s3 ls
                                 pwd
-                                aws s3 cp /var/jenkins_home/workspace/git_docker/Optima_Automation/reports/report.html s3://jenkins-test-26022026/report.html
+                                aws s3 cp /var/jenkins_home/workspace/git_docker/Optima_Automation/reports/report.html s3://$AWS_S3_BUCKET/report.html
                         '''
                     }
                 
